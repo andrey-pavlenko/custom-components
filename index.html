@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Notifications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="riot+compiler.js"></script>
+    <script type="riot/tag" src="tags/track-quote-notifications.tag"></script>
+</head>
+<body>
+<div class="container">
+    <script>
+        window.onSubmit = () => {
+            var track_quote_notifications = document.querySelector('track-quote-notifications')._tag;
+            $('#results').append($(`<div>
+<span>${new Date().toLocaleTimeString()}</span>&nbsp;
+<span><span class="text-info">track_notify_phone: </span><b>${track_quote_notifications.track_notify_phone || "null"}</b></span>
+<span><span class="text-info">track_notify_email: </span><b>${track_quote_notifications.track_notify_email || "null"}</b></span>
+</div>`));
+            return false;
+        }
+    </script>
+    <form onsubmit="return onSubmit()">
+        <div class="row">
+            <div class="span12">
+                <track-quote-notifications></track-quote-notifications>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+    </form>
+    <span class="help-block">В консоли можно обратиться к элементу:<pre>
+        var el = document.querySelector('track-quote-notifications')._tag;
+        console.info(el.track_notify_phone);
+        console.info(el.track_notify_email);</pre></span>
+    <div id="results"></div>
+</div>
+<script>
+    riot.mount('track-quote-notifications', {
+        track_notify_email: 'test@mail.ru',
+        track_notify_phone: '8-910-110-11-11'
+    });
+</script>
+</body>
+</html>
