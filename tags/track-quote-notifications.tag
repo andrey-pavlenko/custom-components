@@ -106,7 +106,7 @@
         }
 
         onEmailChange(event) {
-            this.notification.emain = event.currentTarget.value;
+            this.notification.address = event.currentTarget.value;
         }
 
         onTranslitChange(event) {
