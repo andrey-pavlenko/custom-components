@@ -9,39 +9,39 @@
     <script src="bootstrap/js/bootstrap.js"></script>
     <script src="riot+compiler.js"></script>
     <script type="riot/tag" src="tags/track-quote-notifications.tag"></script>
-</head>
-<body>
-<div class="container">
     <script>
         window.onSubmit = () => {
-            var track_quote_notifications = document.querySelector('track-quote-notifications')._tag;
+            var track_quote_notifications = document.querySelector('track-quote-notifications');
             $('#results').append($(`<div>
 <span>${new Date().toLocaleTimeString()}</span>&nbsp;
-<span><span class="text-info">track_notify_phone: </span><b>${track_quote_notifications.track_notify_phone || "null"}</b></span>
-<span><span class="text-info">track_notify_email: </span><b>${track_quote_notifications.track_notify_email || "null"}</b></span>
+<span><span class="text-info">phone: </span><b>${track_quote_notifications.phone || "null"}</b></span>
+<span><span class="text-info">email: </span><b>${track_quote_notifications.email || "null"}</b></span>
+<span><span class="text-info">use-translit: </span><b>${track_quote_notifications.useTranslit ? "yes" : "no"}</b></span>
 </div>`));
             return false;
         }
     </script>
+</head>
+<body>
+<div class="container">
     <form onsubmit="return onSubmit()">
         <div class="row">
             <div class="span12">
-                <track-quote-notifications></track-quote-notifications>
+                <track-quote-notifications phone="8-910-110-11-11" email="test@test.ru" use-translit tariff-name="Тестовый" tariff-sms-cost={1.90}></track-quote-notifications>
+                <!--<track-quote-notifications ></track-quote-notifications>-->
                 <button type="submit" class="btn btn-primary">Сохранить</button>
             </div>
         </div>
     </form>
     <span class="help-block">В консоли можно обратиться к элементу:<pre>
-        var el = document.querySelector('track-quote-notifications')._tag;
-        console.info(el.track_notify_phone);
-        console.info(el.track_notify_email);</pre></span>
+        var el = document.querySelector('track-quote-notifications').;
+        console.info(el.phone);
+        console.info(el.email);
+        console.info(el.useTranslit);</pre></span>
     <div id="results"></div>
 </div>
 <script>
-    riot.mount('track-quote-notifications', {
-        track_notify_email: 'test@mail.ru',
-        track_notify_phone: '8-910-110-11-11'
-    });
+    riot.mount('*');
 </script>
 </body>
 </html>
